@@ -1,0 +1,31 @@
+@import '../variables'
+
+.walletSelect
+  display: flex
+  justify-content: center
+  margin: $defaultPadding 0
+
+  .walletSelectButton
+    border: 2px solid rgba(255,255,255,0.15)
+    border-radius: $defaultBorderRadius
+    outline: none
+    background: transparent
+    padding: 1em $defaultPadding
+    display: flex
+    justify-content: space-between
+    align-items: center
+    transition: all 150ms linear
+    width: 100%
+    color: $colorTextPrimary
+    font-weight: bold
+
+    &:hover
+      cursor: pointer
+      border-color: rgba(255,255,255,0.6)
+      background: rgba(255,255,255,0.05)
+
+    img
+      width: 2em
+
+.walletDisconnectButton
+  margin-top: $defaultPadding

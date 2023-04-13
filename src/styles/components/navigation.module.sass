@@ -1,0 +1,99 @@
+@import '../variables'
+
+.container
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  display: flex
+  justify-content: space-between
+  padding: $defaultPadding*1.25
+  z-index: 999
+
+.logo
+  display: flex
+  justify-content: center
+  align-items: center
+  left: $defaultPadding*1.5
+  top: $defaultPadding*1.65
+  position: absolute
+  height: 2.5em
+
+  img
+    height: 100%
+
+.navigation
+  background: transparent
+  border-radius: $defaultBorderRadius
+  box-shadow: 0 5px 1em rgba(0, 0, 0, 0.25), inset 0 0 0 2px rgba($colorPrimary, 0.1)
+  border: none
+  color: $colorTextPrimary
+  display: flex
+  justify-content: space-around
+  padding: 0 $defaultPadding
+
+  &.sub
+    right: calc($defaultPadding/2)
+    box-shadow: none
+
+  a
+    display: block
+    color: $colorTextPrimary
+    font-weight: bold
+    text-decoration: none
+    padding: calc($defaultPadding/2) $defaultPadding
+    margin-right: calc($defaultPadding/2)
+    border: 2px solid rgba($colorPrimary, 0)
+    border-radius: $defaultBorderRadius
+    transition: all 150ms linear
+
+    &:last-of-type
+      margin-right: 0
+
+    &:hover, &.active
+      border: 2px solid rgba($colorPrimary, 1)
+      color: $colorPrimary
+
+.button
+  color: $colorPrimary
+  font-weight: bold
+  text-decoration: none
+  padding: calc($defaultPadding/1.7) $defaultPadding
+  margin-right: calc($defaultPadding/2)
+  border: 2px solid rgba($colorPrimary, 0)
+  border-radius: $defaultBorderRadius
+  transition: all 150ms linear
+  background: none
+  box-shadow: 0 5px 1em rgba(0, 0, 0, 0.35)
+  outline: none
+  display: flex
+  justify-content: center
+  align-items: center
+
+  &:hover
+    cursor: pointer
+
+  &:last-of-type
+    margin-right: 0
+
+  &:hover
+    border: 2px solid rgba($colorPrimary, 1)
+
+  &.active
+    border: 2px solid rgba($colorPrimary, 1)
+
+  .settingsIcon
+    transform: scale(1.4)
+
+  .walletIcon
+    transform: scale(1.4)
+    margin-right: .9em
+    position: relative
+    top: -2px
+
+  .warningIcon
+    transform: scale(1.4)
+    margin-right: .9em
+    color: orange
+    position: relative
+    top: -2px

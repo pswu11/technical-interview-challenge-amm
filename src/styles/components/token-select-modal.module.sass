@@ -1,0 +1,68 @@
+@import '../variables'
+
+.tokenSelectCard
+  height: 80vh
+  overflow: hidden
+  padding: 0 !important
+
+  .title
+    padding-top: $defaultPadding
+
+  .searchContainer
+    padding: 0 $defaultPadding
+    margin-bottom: $defaultPadding
+
+  .searchInput
+    background: rgba(0,0,0,0.6)
+    width: 100%
+    border-radius: $defaultBorderRadius
+    color: $colorTextPrimary
+    padding: calc($defaultPadding/1.25) $defaultPadding
+    font-size: 1rem
+    border: 1px solid rgba(255,255,255,0.2)
+    outline: none
+
+  .tokenList
+    overflow-y: auto
+    list-style-type: none
+    display: flex
+    flex-direction: column
+    justify-content: center
+    width: 100%
+    padding: 0
+    margin: 0
+
+    .tokenListItem
+      width: 100%
+      display: flex
+      justify-content: flex-start
+      align-items: center
+      padding: calc($defaultPadding/2) $defaultPadding*1.25
+
+      &:hover
+        background: rgba(255,255,255,0.025)
+        cursor: pointer
+
+      &.disabled
+        cursor: not-allowed
+        background: transparent
+        opacity: 0.4
+
+      .tokenLogo
+        width: 2em
+        margin-right: $defaultPadding
+
+      .tokenSymbol
+        display: block
+
+      .userToken
+        display: block
+        font-size: 0.85rem
+        color: $colorTextDimmed
+
+      .addUserToken
+        color: $colorPrimary
+
+        &:hover
+          text-decoration: underline
+          cursor: pointer
