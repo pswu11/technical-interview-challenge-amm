@@ -6,7 +6,7 @@
 For local development, run the server:
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -38,7 +38,7 @@ When you click ('mousedown' event) inside the modal content, move your cursor ou
 
 ### 5 - Add global state management with local storage persistence
 
-Add a lightweight global state management solution. The global state should be persisted entirely to local storage and loaded each time on app initialization. We could try to use Redux, Hookstate, or rely on React Context as well.
+Add a lightweight global state management solution. The global state should be persisted entirely to local storage and loaded each time on app initialization. We could try to use Redux, Hookstate, Zustand or rely on React Context as well.
 
 Currently we need to store only user settings:
 

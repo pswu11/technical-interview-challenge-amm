@@ -1,7 +1,7 @@
 import type {NextPage} from 'next';
 import {useRouter} from 'next/router';
 import {ParsedUrlQuery} from 'querystring';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {
   IoArrowDown,
   IoSettingsOutline,
@@ -30,29 +30,34 @@ const SwapPage: NextPage = () => {
   const {defaultTokenList} = useTokenLists();
 
   useEffect(() => {
+    const setTokensFromQueryParams = (params: ParsedUrlQuery) => {
+      const oldFrom = tokens.from;
+      const oldTo = tokens.to;
+
+      let from = defaultTokenList.find(
+        (token) => token.address === defaultSwapTokenAddresses.from
+      );
+      let to = defaultTokenList.find(
+        (token) => token.address === defaultSwapTokenAddresses.to
+      );
+
+      if (params.from) {
+        from = defaultTokenList.find((token) => token.address === params.from);
+      }
+      if (params.to) {
+        to = defaultTokenList.find((token) => token.address === params.to);
+      }
+
+      if (oldFrom !== from || oldTo !== to) {
+        setTokens({from, to});
+      }
+    };
     console.log('rerender !!!');
+
     if (router.isReady && defaultTokenList) {
       setTokensFromQueryParams(router.query);
     }
-  }, [router.isReady, router.query, defaultTokenList]);
-
-  const setTokensFromQueryParams = (params: ParsedUrlQuery) => {
-    let from = defaultTokenList.find(
-      (token) => token.address === defaultSwapTokenAddresses.from
-    );
-    let to = defaultTokenList.find(
-      (token) => token.address === defaultSwapTokenAddresses.to
-    );
-
-    if (params.from) {
-      from = defaultTokenList.find((token) => token.address === params.from);
-    }
-    if (params.to) {
-      to = defaultTokenList.find((token) => token.address === params.to);
-    }
-
-    setTokens({from, to});
-  };
+  }, [router.isReady, router.query, defaultTokenList, tokens.from, tokens.to]);
 
   const updateQueryParamsFromTokens = (tokens: TokenPair) => {
     const params = {} as any;
