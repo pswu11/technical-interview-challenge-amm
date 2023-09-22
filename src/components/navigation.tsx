@@ -21,16 +21,34 @@ type Props = {
 export default function Navigation({active}: Props) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [walletOpen, setWalletOpen] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
   const {account, active: walletActive, error, activate} = useWeb3React();
 
   useEffect(() => {
     eagerConnectMetamask();
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const eagerConnectMetamask = async () => {
     const isAuthorized = await connectors.metamask.isAuthorized();
     if (isAuthorized) {
       activate(connectors.metamask);
+    }
+  };
+
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    const scrollThreshold = 128;
+
+    if (scrollY >= scrollThreshold) {
+      setIsScrolling(true);
+    } else {
+      setIsScrolling(false);
     }
   };
 
@@ -46,7 +64,11 @@ export default function Navigation({active}: Props) {
           alt="Generic Blockchain Logo"
         />
       </Link>
-      <nav className={`${styles.navigation}`}>
+      <nav
+        className={`${styles.navigation} ${
+          isScrolling && styles.navigationScroll
+        }`}
+      >
         <Link
           href="/swap"
           className={active && active === 'swap' ? styles.active : ''}
@@ -73,7 +95,12 @@ export default function Navigation({active}: Props) {
         </Link>
       </nav>
       <nav className={`${styles.navigation} ${styles.sub}`}>
-        <button className={styles.button} onClick={() => setWalletOpen(true)}>
+        <button
+          className={`${styles.button} ${
+            isScrolling && styles.navigationScroll
+          }`}
+          onClick={() => setWalletOpen(true)}
+        >
           {isWrongNetwork && (
             <span>
               <IoWarningOutline className={styles.warningIcon} />
@@ -88,10 +115,19 @@ export default function Navigation({active}: Props) {
             </span>
           )}
         </button>
-        <button className={styles.button}>
+        <button
+          className={`${styles.button} ${
+            isScrolling && styles.navigationScroll
+          }`}
+        >
           <IoBookOutline className={styles.settingsIcon} />
         </button>
-        <button className={styles.button} onClick={() => setSettingsOpen(true)}>
+        <button
+          className={`${styles.button} ${
+            isScrolling && styles.navigationScroll
+          }`}
+          onClick={() => setSettingsOpen(true)}
+        >
           <IoSettingsOutline className={styles.settingsIcon} />
         </button>
       </nav>
